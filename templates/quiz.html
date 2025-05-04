@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz - Question {{ question_num }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="top-section">
+        <h1>Question {{ question_num }} of {{ num_questions }}</h1>
+        <p>{{ question.q }}</p>
+    </div>
+    <form method="post">
+        {% for i in range(4) %}
+        <label>
+            <input type="radio" name="answer" value="{{ question.a[i] }}" {% if user_answer == question.a[i] %}checked{% endif %}>
+            {{ question.a[i] }}
+        </label><br>
+        {% endfor %}
+        <br>
+        <label>
+            <input type="checkbox" name="mark" {% if marked %}checked{% endif %}> Mark this question for review
+        </label><br>
+        <label>
+            <input type="checkbox" name="request_answer" {% if question.q in answer_requests %}checked{% endif %}> Send me an email on how to get to the answer
+        </label><br><br>
+        {% if question_num > 1 %}
+        <button type="submit" name="next_action" value="previous">Previous</button>
+        {% endif %}
+        <button type="submit" name="next_action" value="next">Next</button>
+        <button type="submit" name="next_action" value="hint">Hint (Deducts 2.5% or 0.5 points)</button>
+        <br><br>
+        {% if show_hint %}
+        <p>Hint: Look in {{ hint }}</p>
+        {% endif %}
+        <br>
+        <button type="submit" name="next_action" value="finish">Finished - End Test and Submit</button>
+        <br><br>
+        <button type="submit" name="next_action" value="review_marked">Go Back to Marked Questions</button>
+        <br><br>
+        <button type="submit" name="next_action" value="check_time">Check Time Left</button>
+        {% if show_time %}
+        <p>Average Time Per Question Answered: {{ avg_min_per_question }} minute{% if avg_min_per_question != 1 %}s{% endif %}, {{ avg_sec_per_question }} second{% if avg_sec_per_question != 1 %}s{% endif %}</p>
+        <p>Average Time Per Question Remaining: {{ avg_min_per_question_left }} minute{% if avg_min_per_question_left != 1 %}s{% endif %}, {{ avg_sec_per_question_left }} second{% if avg_sec_per_question_left != 1 %}s{% endif %}</p>
+        <p>Total Time Elapsed: {{ elapsed_min }} minute{% if elapsed_min != 1 %}s{% endif %}, {{ elapsed_sec }} second{% if elapsed_sec != 1 %}s{% endif %}</p>
+        <p>Total Time Left: {{ remaining_min }} minute{% if remaining_min != 1 %}s{% endif %}, {{ remaining_sec }} second{% if remaining_sec != 1 %}s{% endif %}</p>
+        {% endif %}
+    </form>
+</body>
+</html>

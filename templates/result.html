@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if not user_info %}
+    <h1>Contact Information</h1>
+    <p>Please provide your contact information to receive your results and any requested answers:</p>
+    <form method="post" action="{{ url_for('end_test') }}">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required><br><br>
+        <label>
+            <input type="checkbox" name="email_answers"> Email me the correct answers for my test
+        </label><br>
+        <label>
+            <input type="checkbox" name="opt_in_text"> Opt-in for a text message for updates and if you’re winning the leaderboard for that week (free Milwaukee tool)
+        </label><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    {% else %}
+    <h1>Quiz Results</h1>
+    <p>Total Correct: {{ score }}/{{ total }} ({{ total_percentage|round(0) }}%)</p>
+    <h2>Category Percentages:</h2>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Percentage Correct</th>
+        </tr>
+        {% for category, percentage in category_percentages.items() %}
+        <tr>
+            <td>{{ category }}</td>
+            <td>{{ percentage|round(0) }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('leaderboard') }}">View Leaderboard</a><br>
+    <a href="{{ url_for('index') }}">Restart Quiz</a>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Journeyman Test Prep</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Journeyman Test Prep</h1>
+    <h2>Colorado Journeyman Wiremans Exam</h2>
+    <form method="post" action="{{ url_for('start_quiz') }}">
+        <label for="username">Make a username if you don’t have one already:</label>
+        <input type="text" id="username" name="username" value="Anonymous"><br><br>
+        <label for="num_questions">Select number of questions:</label>
+        <select id="num_questions" name="num_questions">
+            <option value="20">20 Questions (1 hour)</option>
+            <option value="40">40 Questions (2 hours)</option>
+            <option value="60">60 Questions (3 hours)</option>
+            <option value="100">100 Questions (4.5 hours)</option>
+        </select><br><br>
+        <button type="submit">Start Quiz</button>
+    </form>
+    <br>
+    <a href="{{ url_for('leaderboard') }}">View Leaderboard</a>
+    <h3>New Features:</h3>
+    <ul>
+        <li>Mark questions for review before submitting your test.</li>
+        <li>Request an email with guidance on how to find answers in the NEC if you're stuck.</li>
+        <li>Use the "Hint" button to get the NEC article (deducts 2.5% or half a point per question).</li>
+        <li>Choose the number of questions (20, 40, 60, or 100) with corresponding timers (1, 2, 3, or 4.5 hours).</li>
+    </ul>
+</body>
+</html>

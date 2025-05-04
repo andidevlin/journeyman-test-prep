@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review {{ filter_type|capitalize }} Questions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Review {{ filter_type|capitalize }} Questions</h1>
+    {% if review_questions %}
+    {% for q in review_questions %}
+    <p><strong>Question {{ q.num }}:</strong> {{ q.question }}</p>
+    <p>Your Answer: {{ q.answer or 'Not answered' }}</p>
+    <p>Correct Answer: {{ q.correct }}</p>
+    <p>Marked: {{ 'Yes' if q.marked else 'No' }}</p>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <p>No {{ filter_type }} questions to review.</p>
+    {% endif %}
+    <a href="{{ url_for('result') }}">Back to Result</a><br>
+    <a href="{{ url_for('index') }}">Restart Quiz</a>
+</body>
+</html>

@@ -1,0 +1,48 @@
+body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    margin: 50px; 
+}
+h1 { 
+    color: #333; 
+}
+button { 
+    padding: 10px 20px; 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    margin: 5px; 
+}
+button:hover { 
+    background-color: #0056b3; 
+}
+button[name="next_action"][value="finish"] { 
+    background-color: #ff0000; 
+}
+button[name="next_action"][value="finish"]:hover { 
+    background-color: #cc0000; 
+}
+label { 
+    display: block; 
+    margin: 10px 0; 
+    text-align: left; 
+    margin-left: 20%; 
+}
+.top-section { 
+    text-align: left; 
+    margin-left: 20%; 
+}
+table { 
+    margin: 20px auto; 
+    border-collapse: collapse; 
+    width: 80%; 
+}
+th, td { 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: center; 
+}
+th { 
+    background-color: #f2f2f2; 
+}
